@@ -25,8 +25,6 @@ public class UploadController {
      * @param model
      * @return
      */
-    /*@Resource
-    private IUserService userService;*/
     @Resource
     private PhotoService photoService;
 
@@ -35,14 +33,13 @@ public class UploadController {
     public String upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request,
                          ModelMap model) {
         System.out.println("file是(我认为应该是文件上传的名字)"+file);
-        //file:org.springframework.web.multipart.commons.CommonsMultipartFile@69f77bae
         //	String path = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"media";
         String path = request.getSession().getServletContext().getRealPath("media");
         //path:D:\ideaworkspace\HomeDecoration\target\HomeDecoration\media
         String fileName = file.getOriginalFilename();
         String suffix=fileName.substring(fileName.lastIndexOf(".") + 1);
-        System.out.println("查看刚刚上传的后缀名"+suffix);
-        System.out.println("看看获得的文件fileName的名称"+fileName);
+       /* System.out.println("查看刚刚上传的后缀名"+suffix);
+        System.out.println("看看获得的文件fileName的名称"+fileName);*/
         // String fileName = new Date().getTime()+".jpg";
         File targetFile = new File(path, fileName);
         //target:D:\ideaworkspace\HomeDecoration\target\HomeDecoration\media\flower.jpg
@@ -60,11 +57,9 @@ public class UploadController {
         model.addAttribute("fileUrl", request.getContextPath() + "/media/" + fileName);
         //2将相关路径信息拷贝到数据库，这里需要的是相对路径，不然服务器无法使用
         String fileurl=request.getContextPath() + "/media/" + fileName;
-        //图片的路径信息保存
-
         photo.setPhotoname(fileName);
         photo.setPhotourl("/media/"+fileName);
-        photoService.insertPhoto(photo);
+        photoService.insertPhoto(photo);//实现图片信息地址到数据库的插入操作
         return "ok";
     }
 
