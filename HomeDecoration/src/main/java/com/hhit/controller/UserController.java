@@ -105,6 +105,9 @@ public class UserController {
         else if(name.equals("putong")){
             return "pumain";
         }
+        else if(name.equals("updatepassword")){
+            return "updatepassword";
+        }
         else{
             return null;
         }
