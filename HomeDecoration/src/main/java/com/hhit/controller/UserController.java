@@ -35,40 +35,6 @@ public class UserController {
     @Resource
     private PhotoService photoService;
 
-    @RequestMapping("/insert11")
-    public String insert1(String username,String password,String password1){
-        User user=new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user2=userService.selectUser(username);
-        boolean s=empty1(user2);
-        if(s==false){
-            if(password.equals(password1))
-            {
-                userService.insertUser(user);
-                String msg="注册成功，请登录";
-                int type=JOptionPane.YES_NO_CANCEL_OPTION;
-                String title="信息提示！";
-                JOptionPane.showMessageDialog(null, msg,title,type);
-                return "login";
-            }
-            else{
-                String msg="确认密码不一致，重新zhuce";
-                int type=JOptionPane.YES_NO_CANCEL_OPTION;
-                String title="信息提示！";
-                JOptionPane.showMessageDialog(null, msg,title,type);
-                return "register";
-            }
-        }
-        else{
-            String msg="该用户名已存在，请重新注册";
-            int type=JOptionPane.YES_NO_CANCEL_OPTION;
-            String title="信息提示！";
-            JOptionPane.showMessageDialog(null, msg,title,type);
-            return "register";
-        }
-    }
-
     /**
      * 作用:对象控制判断
      * 用来判断返回对象是否为空，否则返回对象为空的话，页面会出错
@@ -215,7 +181,7 @@ public class UserController {
             userlist.get(i).getPassword());
         }
         modelMap.addAttribute("userlist",userlist);
-        return "ok";
+        return "usermanage";
     }
 
 }

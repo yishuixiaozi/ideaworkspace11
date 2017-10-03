@@ -94,7 +94,7 @@
             </a>
             <ul>
                 <li><a class="menu_a" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>用户管理（暂定）</a></li>
-                <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i>订单管理</a></li>
+                <li><a class="menu_a" link="/user/searchall.action"><i class="icon icon-caret-right"></i>订单管理</a></li>
                 <li><a class="menu_a" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>个人密码修改</a></li>
             </ul>
         </li>

@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -45,61 +46,21 @@
                         <table class="table table-bordered data-table">
                             <thead>
                             <tr>
-                                <th>字段1</th>
-                                <th>字段2</th>
-                                <th>字段3</th>
-                                <th>字段4</th>
+                                <th>姓名</th>
+                                <th>密码</th>
+                                <th>身份</th>
+                                <th>电话</th>
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="user" items="${userlist}">
                             <tr class="gradeX">
-                                <td>王四</td>
-                                <td>Internet
-                                    Explorer 4.0</td>
-                                <td>Win 95+</td>
-                                <td class="center">4</td>
+                                <td>${user.username}</td>
+                                <td>${user.password}</td>
+                                <td>${user.identity}</td>
+                                <td>${user.tel}</td>
                             </tr>
-                            <tr class="gradeC">
-                                <td>李四</td>
-                                <td>Internet
-                                    Explorer 5.0</td>
-                                <td>Win 95+</td>
-                                <td class="center">5</td>
-                            </tr>
-                            <tr class="gradeA">
-                                <td>张三</td>
-                                <td>Internet
-                                    Explorer 5.5</td>
-                                <td>Win 95+</td>
-                                <td class="center">5.5</td>
-                            </tr>
-                            <tr class="gradeA">
-                                <td>小周</td>
-                                <td>3</td>
-                                <td>Win 98+</td>
-                                <td class="center">6</td>
-                            </tr>
-                            <tr class="gradeA">
-                                <td>未庄</td>
-                                <td>5</td>
-                                <td>Win XP SP2+</td>
-                                <td class="center">7</td>
-                            </tr>
-                            <tr class="gradeA">
-                                <td>格里</td>
-                                <td>7</td>
-                                <td>Win XP</td>
-                                <td class="center">6</td>
-                            </tr>
-                            <tr class="gradeA">
-                                <td>张翰</td>
-                                <td>9</td>
-                                <td>Win 98+ / OSX.2+</td>
-                                <td class="center">1.7</td>
-                            </tr>
-
-
-
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
