@@ -104,7 +104,6 @@ public class UserController {
                 msg="wrong";
             }
             else{//查到对象了
-                System.out.println("查询对象的密码"+user2.getPassword());
                 System.out.println("查询对象的身份"+user2.getIdentity());
                 //这里是添加session，用于后台系统识别用户所用
                 HttpSession session=request.getSession();
@@ -140,7 +139,6 @@ public class UserController {
     @ResponseBody
     public String adduser(User user){
         String msg;
-        System.out.println("新添加用户姓名"+user.getUsername());
         user2=userService.selectUser(user.getUsername());
         boolean s=empty1(user2);
         if(s==false){
@@ -191,16 +189,28 @@ public class UserController {
     @ResponseBody
     public Map<String,Object> updatepass(HttpServletRequest request,HttpServletResponse response) throws Exception{
         System.out.println("案例测试");
-        System.out.println("password="+request.getParameter("password"));
+        //创建session获取session里边的值,session中的存值默认是对象Object，取值的时候需要进行字符转换
+        HttpSession session=request.getSession();
+        String username=(String)session.getAttribute("username");
+        System.out.println("字符转换后的session值"+username);
+        user2.setUsername(username);
+        user2.setPassword(request.getParameter("password"));
         Map<String,Object> map=new HashMap<String, Object>();
-
-        if(request.getParameter("password").equals("123")){
+        if(request.getParameter("password")==null){
+            map.put("msg","修改信息失败");
+        }
+        else{
+            userService.updatePass(user2);
+            map.put("msg","密码修改成功，请重新登录");
+        }
+       /* if(request.getParameter("password").equals("123")){
             System.out.println("youright");
             map.put("msg","testsuccess");
         }else{
             System.out.println("不等于");
             map.put("msg","testfalse");
         }
+        */
         return  map;
     }
 

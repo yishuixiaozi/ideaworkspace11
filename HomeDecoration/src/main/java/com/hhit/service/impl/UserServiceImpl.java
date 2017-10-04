@@ -25,8 +25,10 @@ public class UserServiceImpl implements IUserService{
         /*return null;*/
     }
     public void insertUser(User user){
-        System.out.println("121212121");
         userDao.insertUser(user);
 
+    }
+    public void updatePass(User user){
+        userDao.updatePass(user);
     }
 }

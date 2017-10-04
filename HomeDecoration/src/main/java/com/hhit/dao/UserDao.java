@@ -13,4 +13,5 @@ public interface UserDao {
     void insertPhoto(AdminPhoto photo);
     List<AdminPhoto> selectPhoto();
     List<User> searchUserAll();
+    void updatePass(User user);//密码修改
 }

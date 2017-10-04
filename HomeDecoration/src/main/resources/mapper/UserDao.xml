@@ -12,6 +12,9 @@
         insert into user(username,password) value(#{username},#{password})
     </insert>
 
+    <update id="updatePass" parameterType="com.hhit.model.User">
+        UPDATE user set password=#{password} where username=#{username}
+    </update>
     <insert id="insertPhoto" parameterType="com.hhit.model.AdminPhoto">
         insert into adminphoto(photoname,photourl) value(#{photoname},#{photourl})
     </insert>

@@ -35,10 +35,16 @@
                  dataType:'json',
                  url:"user/updatepass.action",
                  error:function (data) {
-                     alert("出错了");
+                     var obj=JSON.stringify(data.msg);
+                     alert(obj);
                  },
                  success:function(data){
-                     alert("成功了");
+                     /*将json对象转换字符串的形式不然打印后的结果就是Object*/
+                     var obj=JSON.stringify(data.msg);
+                     alert(obj);
+                     /*window.location.href = "view/login.jsp";这个跳转后还是子页面*/
+                     /*top.loaction.href的跳转是跳出子页面成为最外层页面*/
+                     top.location.href = "view/login.jsp"
                  }
 
              });
