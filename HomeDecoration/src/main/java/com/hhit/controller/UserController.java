@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import javax.swing.*;
 import javax.xml.crypto.Data;
@@ -88,7 +89,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/login")
-    public @ResponseBody String loginuser(User user){
+    public @ResponseBody String loginuser(User user,HttpServletRequest request){
         /*System.out.println("user中username的值"+user.getUsername());
         System.out.println("user中password的值"+user.getPassword());*/
         String msg ;
@@ -105,6 +106,9 @@ public class UserController {
             else{//查到对象了
                 System.out.println("查询对象的密码"+user2.getPassword());
                 System.out.println("查询对象的身份"+user2.getIdentity());
+                //这里是添加session，用于后台系统识别用户所用
+                HttpSession session=request.getSession();
+                session.setAttribute("username",user2.getUsername());//设置username的值，由页面进行获取
                 if(user.getPassword().equals(user2.getPassword())){//密码对了
                     if(user2.getIdentity()==null){//判断是否为null
                         msg="putong";
@@ -136,8 +140,7 @@ public class UserController {
     @ResponseBody
     public String adduser(User user){
         String msg;
-        System.out.println("111111111"+user.getUsername());
-        System.out.println("222222222"+user.getPassword());
+        System.out.println("新添加用户姓名"+user.getUsername());
         user2=userService.selectUser(user.getUsername());
         boolean s=empty1(user2);
         if(s==false){
@@ -182,6 +185,23 @@ public class UserController {
         }
         modelMap.addAttribute("userlist",userlist);
         return "usermanage";
+    }
+
+    @RequestMapping("/updatepass")
+    @ResponseBody
+    public Map<String,Object> updatepass(HttpServletRequest request,HttpServletResponse response) throws Exception{
+        System.out.println("案例测试");
+        System.out.println("password="+request.getParameter("password"));
+        Map<String,Object> map=new HashMap<String, Object>();
+
+        if(request.getParameter("password").equals("123")){
+            System.out.println("youright");
+            map.put("msg","testsuccess");
+        }else{
+            System.out.println("不等于");
+            map.put("msg","testfalse");
+        }
+        return  map;
     }
 
 }

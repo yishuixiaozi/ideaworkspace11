@@ -25,6 +25,25 @@
     <link rel="stylesheet" href="css/matrix-media.css" />
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <%--ajax传值测试--%>
+    <script type="text/javascript">
+         function updatepass() {
+             alert("触发事件成功");
+             $.ajax({
+                 data:"password="+$("#password").val(),
+                 type:"GET",
+                 dataType:'json',
+                 url:"user/updatepass.action",
+                 error:function (data) {
+                     alert("出错了");
+                 },
+                 success:function(data){
+                     alert("成功了");
+                 }
+
+             });
+         }
+    </script>
 </head>
 
 <body>
@@ -55,10 +74,9 @@
                                     </div>
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-success">保存</button>
+                                    <button type="button" class="btn btn-success" onclick="updatepass()">保存</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -66,7 +84,6 @@
         </div>
     </div>
 </div>
-
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.ui.custom.js"></script>
 <script src="js/bootstrap.min.js"></script>

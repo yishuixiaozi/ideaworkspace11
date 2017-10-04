@@ -46,7 +46,6 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-            /*alert("看看这一步是否执行");*/
             $("#form1").ajaxForm(function (data) {
                 /*alert(data);*/
                 if (data.indexOf("wrong")>-1) {

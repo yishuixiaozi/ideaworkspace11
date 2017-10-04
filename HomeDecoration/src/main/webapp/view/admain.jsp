@@ -15,9 +15,7 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-    <!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+    <%--加载的样式--%>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
     <link rel="stylesheet" href="css/matrix-style.css" />
@@ -29,7 +27,7 @@
 <body>
 <!--Header-part-->
 <div id="header">
-    <h1><a href="dashboard.html">信息管理系统平台</a></h1>
+    <h1><a href="dashboard.html">信息管理系统</a></h1>
 </div>
 <!--close-Header-part-->
 
@@ -39,7 +37,7 @@
         <li  class="dropdown" id="profile-messages" >
             <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle">
                 <i class="icon icon-user"></i>&nbsp;
-                <span class="text">欢迎你，admin</span>&nbsp;
+                <span class="text">欢迎你，${sessionScope.username}</span>&nbsp;
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -47,7 +45,7 @@
                 <li class="divider"></li>
                 <li><a href="#"><i class="icon-check"></i> 我的任务</a></li>
                 <li class="divider"></li>
-                <li><a href="login.html"><i class="icon-key"></i> 退出系统</a></li>
+                <li><a href="index.jsp"><i class="icon-key"></i> 退出系统</a></li>
             </ul>
         </li>
         <li class="dropdown" id="menu-messages">
@@ -68,7 +66,7 @@
             </ul>
         </li>
         <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">&nbsp;设置</span></a></li>
-        <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">&nbsp;退出系统</span></a></li>
+        <li class=""><a title="" href="index.jsp"><i class="icon icon-share-alt"></i> <span class="text">&nbsp;退出系统</span></a></li>
     </ul>
 </div>
 <!--close-top-Header-menu-->
@@ -84,7 +82,7 @@
 <div id="sidebar" style="OVERFLOW-Y: auto; OVERFLOW-X:hidden;">
     <ul>
         <li class="submenu active">
-            <a class="menu_a" href="index2.jsp"><i class="icon icon-home"></i> <span>控制面板</span></a>
+            <a class="menu_a" link="index.jsp"><i class="icon icon-home"></i> <span>控制面板</span></a>
         </li>
         <li class="submenu">
             <a href="#">
@@ -106,7 +104,7 @@
             </a>
             <ul>
                 <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i> 订单管理</a></li>
-                <li><a class="menu_a" link="grid.jsp"><i class="icon icon-caret-right"></i>留言板管理</a></li>
+                <li><a class="menu_a" link="view/grid.jsp"><i class="icon icon-caret-right"></i>留言板管理</a></li>
                 <li><a class="menu_a" link="view/usermanage.jsp"><i class="icon icon-caret-right"></i>用户管理</a></li>
                 <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i>设计师</a></li>
             </ul>
@@ -115,13 +113,12 @@
             <a href="#">
                 <i class="icon icon-stop"></i>
                 <span>拓展功能</span>
-
             </a>
             <ul>
                 <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i>图片墙</a></li>
                 <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i>日历</a></li>
                 <li><a class="menu_a" link="#"><i class="icon icon-caret-right"></i>清单示例</a></li>
-                <li><a class="menu_a" link="chat.jsp"><i class="icon icon-caret-right"></i>聊天</a></li>
+                <li><a class="menu_a" link="view/chat.jsp"><i class="icon icon-caret-right"></i>聊天</a></li>
             </ul>
         </li>
         <li class="submenu">
@@ -131,7 +128,7 @@
                 <!--<span class="label label-important">4</span>-->
             </a>
             <ul>
-                <li><a class="menu_a" link="error403.jsp"><i class="icon icon-caret-right"></i>Error 403</a></li>
+                <li><a class="menu_a" link="view/error403.jsp"><i class="icon icon-caret-right"></i>Error 403</a></li>
 
             </ul>
         </li>
@@ -143,10 +140,10 @@
 <div id="content">
     <!--breadcrumbs-->
     <div id="content-header">
-        <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+        <div id="breadcrumb"> <a href="index.jsp" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
     </div>
-    <!--End-breadcrumbs-->
-    <iframe src="index2.html" id="iframe-main" frameborder='0' style="width:100%;"></iframe>
+    <!--End-breadcrumbs,这里是该进入后台管理页面的时候就会显示的内容，相当于次首页内容了-->
+    <iframe src="view/index2.jsp" id="iframe-main" frameborder='0' style="width:100%;"></iframe>
 </div>
 <!--end-main-container-part-->
 
@@ -166,7 +163,8 @@
         $("#iframe-main").height($(window).height()-90);
         $("#sidebar").height($(window).height()-50);
     }
-
+    //$(fucntion(){});相当于是$(doucument).ready(fucntion(){});的简写
+    //加载页面的时候自动执行该部分内容
     $(function(){
         init();
         $(window).resize(function(){
