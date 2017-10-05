@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="css/matrix-style.css" />
     <link rel="stylesheet" href="css/matrix-media.css" />
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
-
 </head>
 
 <body>
@@ -91,9 +90,9 @@
 
             </a>
             <ul>
-                <li><a class="menu_a" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>用户管理（暂定）</a></li>
+                <li><a class="menu_a" id="yonghu" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>用户管理（暂定）</a></li>
                 <li><a class="menu_a" link="/user/searchall.action"><i class="icon icon-caret-right"></i>订单管理</a></li>
-                <li><a class="menu_a" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>个人密码修改</a></li>
+                <li><a class="menu_a" id="yonghu3" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>个人密码修改</a></li>
             </ul>
         </li>
         <li class="submenu">
@@ -157,6 +156,20 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function(){
+    alert("进入首页");
+        var ident="<%=session.getAttribute("identity")%>";
+        alert(ident);
+        if(ident=="admin"){
+            /*alert("你成功了");*/
+            document.getElementById("yonghu").style.visibility="hidden";
+            document.getElementById("yonghu").style.display="none";
+        }
+        else
+        {
+            alert("没有得到信息亲");
+        }
+    });
     //初始化相关元素高度
     function init(){
         $("body").height($(window).height()-80);

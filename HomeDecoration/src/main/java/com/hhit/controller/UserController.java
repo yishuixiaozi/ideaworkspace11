@@ -108,6 +108,7 @@ public class UserController {
                 //这里是添加session，用于后台系统识别用户所用
                 HttpSession session=request.getSession();
                 session.setAttribute("username",user2.getUsername());//设置username的值，由页面进行获取
+                session.setAttribute("identity",user2.getIdentity());
                 if(user.getPassword().equals(user2.getPassword())){//密码对了
                     if(user2.getIdentity()==null){//判断是否为null
                         msg="putong";
@@ -203,14 +204,6 @@ public class UserController {
             userService.updatePass(user2);
             map.put("msg","密码修改成功，请重新登录");
         }
-       /* if(request.getParameter("password").equals("123")){
-            System.out.println("youright");
-            map.put("msg","testsuccess");
-        }else{
-            System.out.println("不等于");
-            map.put("msg","testfalse");
-        }
-        */
         return  map;
     }
 

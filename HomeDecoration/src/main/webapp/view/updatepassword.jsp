@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/matrix-media.css" />
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
-    <%--ajax传值测试--%>
+    <%--ajax传值测试结果--%>
     <script type="text/javascript">
          function updatepass() {
              alert("触发事件成功");
