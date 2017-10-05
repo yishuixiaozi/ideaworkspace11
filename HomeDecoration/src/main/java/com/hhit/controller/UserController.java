@@ -83,15 +83,11 @@ public class UserController {
 
     /**
      * 用户登录
-     * 这里是用户类，前台传递的两个值自动封装成为User对象，然后进行数据比较
-     * 采用的是一步刷新来实现用户信息错误页面不跳转，用户信息正确判断用户身份进行跳转
      * @param user
      * @return
      */
     @RequestMapping("/login")
     public @ResponseBody String loginuser(User user,HttpServletRequest request){
-        /*System.out.println("user中username的值"+user.getUsername());
-        System.out.println("user中password的值"+user.getPassword());*/
         String msg ;
         if(user.getUsername()==""){
             msg="wrong";
@@ -110,19 +106,9 @@ public class UserController {
                 session.setAttribute("username",user2.getUsername());//设置username的值，由页面进行获取
                 session.setAttribute("identity",user2.getIdentity());
                 if(user.getPassword().equals(user2.getPassword())){//密码对了
-                    if(user2.getIdentity()==null){//判断是否为null
-                        msg="putong";
-                    }
-                    else{//不为空判断是否为管理员或者普通员工
-                        if(user2.getIdentity().equals("admin")){
-                            msg="admin";
-                        }
-                        else{
-                            msg="putong";
-                        }
-                    }
+                    msg="admin";
                 }
-                else{//密码不对
+                else{//用户信息错误
                     msg="wrong";
                 }
             }

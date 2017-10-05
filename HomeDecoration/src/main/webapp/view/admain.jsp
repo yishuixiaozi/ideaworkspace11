@@ -91,7 +91,7 @@
             </a>
             <ul>
                 <li><a class="menu_a" id="yonghu" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>用户管理（暂定）</a></li>
-                <li><a class="menu_a" link="/user/searchall.action"><i class="icon icon-caret-right"></i>订单管理</a></li>
+                <li><a class="menu_a" id="yonghu1" link="/user/searchall.action"><i class="icon icon-caret-right"></i>订单管理</a></li>
                 <li><a class="menu_a" id="yonghu3" link="view/updatepassword.jsp"><i class="icon icon-caret-right"></i>个人密码修改</a></li>
             </ul>
         </li>
@@ -152,22 +152,19 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/nicescroll/jquery.nicescroll.min.js"></script>
 <script src="js/matrix.js"></script>
-
-
 <script type="text/javascript">
-
     $(document).ready(function(){
-    alert("进入首页");
         var ident="<%=session.getAttribute("identity")%>";
-        alert(ident);
-        if(ident=="admin"){
-            /*alert("你成功了");*/
+       /* alert(ident);*/
+        /*登录的是普通用户，设置某些菜单不可见*/
+        if(ident!="admin"){
             document.getElementById("yonghu").style.visibility="hidden";
             document.getElementById("yonghu").style.display="none";
+            document.getElementById("yonghu1").style.marginTop="-20px";
         }
+        /*登录的是管理员*/
         else
         {
-            alert("没有得到信息亲");
         }
     });
     //初始化相关元素高度

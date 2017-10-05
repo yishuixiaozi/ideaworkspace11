@@ -24,13 +24,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#loginform1").ajaxForm(function (data) {
-                /*alert(data);*/
                 if (-1 < data.indexOf("admin")) {
                     window.location.href = "/user/tiaozhuan.action?name=admin";
-                }
-                else if(data.indexOf("putong")>-1){
-                    window.location.href = "/user/tiaozhuan.action?name=putong";
-                    /*alert("用户名或密码错误！");*/
                 }
                 else{
                     alert("用户名或密码错误！");
