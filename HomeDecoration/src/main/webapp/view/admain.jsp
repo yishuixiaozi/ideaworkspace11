@@ -72,7 +72,7 @@
 
 <!--start-top-serch-->
 <div id="search">
-    <input type="text" placeholder="搜索..."/>
+    <input type="text" placeholder="搜索..." style="height: 30px"/>
     <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div>
 <!--close-top-serch-->
@@ -128,7 +128,6 @@
             </a>
             <ul>
                 <li><a class="menu_a" link="view/error403.jsp"><i class="icon icon-caret-right"></i>Error 403</a></li>
-
             </ul>
         </li>
     </ul>
@@ -155,8 +154,6 @@
 <script type="text/javascript">
     $(document).ready(function(){
         var ident="<%=session.getAttribute("identity")%>";
-       /* alert(ident);*/
-        /*登录的是普通用户，设置某些菜单不可见*/
         if(ident!="admin"){
             document.getElementById("yonghu").style.visibility="hidden";
             document.getElementById("yonghu").style.display="none";

@@ -19,35 +19,37 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="css/matrix-style2.css" />
-    <link rel="stylesheet" href="css/matrix-media.css" />
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="../css/matrix-style2.css" />
+    <link rel="stylesheet" href="../css/matrix-media.css" />
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
     <%--ajax传值测试结果--%>
     <script type="text/javascript">
          function updatepass() {
-             alert("触发事件成功");
-             $.ajax({
-                 data:"password="+$("#password").val(),
-                 type:"GET",
-                 dataType:'json',
-                 url:"user/updatepass.action",
-                 error:function (data) {
-                     var obj=JSON.stringify(data.msg);
-                     alert(obj);
-                 },
-                 success:function(data){
-                     /*将json对象转换字符串的形式不然打印后的结果就是Object*/
-                     var obj=JSON.stringify(data.msg);
-                     alert(obj);
-                     /*window.location.href = "view/login.jsp";这个跳转后还是子页面*/
-                     /*top.loaction.href的跳转是跳出子页面成为最外层页面*/
-                     top.location.href = "view/login.jsp"
-                 }
-
-             });
+             /*alert("触发事件成功");*/
+             if($("#password").val()!=$("#password2").val()){
+                 alert("两次密码输入不等，请重新输入");
+                 document.getElementById("password").value="";
+                 document.getElementById("password2").value="";
+             }else{
+                 $.ajax({
+                     data:"password="+$("#password").val(),
+                     type:"GET",
+                     dataType:'json',
+                     url:"user/updatepass.action",
+                     error:function (data) {
+                         alert(data["msg"]);
+                     },
+                     success:function(data){
+                         alert(data["msg"]);//返回的data是一个map,所以data["msg"]是对象的值
+                         /*window.location.href = "view/login.jsp";这个跳转后还是子页面*/
+                         /*top.loaction.href的跳转是跳出子页面成为最外层页面*/
+                         top.location.href = "view/login.jsp"
+                     }
+                 });
+             }
          }
     </script>
 </head>
@@ -70,13 +72,13 @@
                                 <div class="control-group">
                                     <label class="control-label">密码</label>
                                     <div class="controls">
-                                        <input id="password" type="password" name="password" />
+                                        <input id="password" type="password" name="password" style="height: 30px"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label">确认密码</label>
                                     <div class="controls">
-                                        <input id="password2" type="password" name="password2" />
+                                        <input id="password2" type="password" name="password2" style="height: 30px"/>
                                     </div>
                                 </div>
                                 <div class="form-actions">
@@ -90,12 +92,12 @@
         </div>
     </div>
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.ui.custom.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.validate.js"></script>
-<script src="js/jquery.wizard.js"></script>
-<script src="js/matrix.js"></script>
-<script src="js/matrix.wizard.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.ui.custom.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.validate.js"></script>
+<script src="../js/jquery.wizard.js"></script>
+<script src="../js/matrix.js"></script>
+<script src="../js/matrix.wizard.js"></script>
 </body>
 </html>

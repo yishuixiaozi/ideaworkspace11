@@ -137,6 +137,13 @@ public class UserController {
         return msg;
     }
 
+    /**
+     * 页面显示从数据库获取的地址然后显示图片
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/ajax")
     @ResponseBody
     public  Map<String,Object> login(HttpServletRequest request,HttpServletResponse response) throws Exception{
@@ -146,6 +153,13 @@ public class UserController {
         map.put("msg", "/media/flower.jpg");
         return map;
     }
+
+    /**
+     * 这个应该是获取数据库中排序后前几条数据后的显示图
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/ajax1")
     @ResponseBody
     public List<AdminPhoto> select(HttpServletRequest request,HttpServletResponse response){
@@ -158,33 +172,42 @@ public class UserController {
         return photolist;
     }
 
+    /**
+     * 查询所有的用户的信息的集合并且在页面显示
+     * @param modelMap
+     * @return
+     */
     @RequestMapping("/searchall")
     public String select1(ModelMap modelMap){
         List<User> userlist;
         userlist=userService.searchUserAll();
-        int m=userlist.size();
-        for (int i=0;i<m;i++)
+        /*int m=userlist.size(); 查看数据库获取的用户集合是否正确的查到了*/
+        /*for (int i=0;i<m;i++)
         {
             System.out.println("测试user列表"+userlist.get(i).getUsername()+"密码"+
             userlist.get(i).getPassword());
-        }
+        }*/
         modelMap.addAttribute("userlist",userlist);
         return "usermanage";
     }
 
+    /**
+     * 获取登录界面的时候放在session中的个人用户名的信息
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/updatepass")
     @ResponseBody
     public Map<String,Object> updatepass(HttpServletRequest request,HttpServletResponse response) throws Exception{
-        System.out.println("案例测试");
-        //创建session获取session里边的值,session中的存值默认是对象Object，取值的时候需要进行字符转换
         HttpSession session=request.getSession();
-        String username=(String)session.getAttribute("username");
-        System.out.println("字符转换后的session值"+username);
+        String username=(String)session.getAttribute("username");//session中以对象形式存储，需要转换
         user2.setUsername(username);
         user2.setPassword(request.getParameter("password"));
         Map<String,Object> map=new HashMap<String, Object>();
         if(request.getParameter("password")==null){
-            map.put("msg","修改信息失败");
+            map.put("msg","修改信息失败,请重新修改");
         }
         else{
             userService.updatePass(user2);
